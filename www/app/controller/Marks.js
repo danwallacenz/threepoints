@@ -86,11 +86,26 @@ Ext.define("GMarks.controller.Marks", {
     },
 
     onItemTapCommand: function( list, index, element, event) {
-        var record = list.getRecord(element);
+        // var record = list.getRecord(element);
         var address = list.getStore().getAt(index);
+
+        address.getInfo(function(response){
+            // var data = response.responseText;
+            console.log('getInfo callback');
+            console.log(response);
+            // console.log(response.responseText);
+            // console.log('response is a ' + Ext.getClassName(data));
+            // console.log(response.get('x'));
+            // console.log(response.get('y'));
+            console.log('latitude: ' + response.y);
+            console.log('longitude: ' + response.x);
+
+        });
         console.log(address.get('a'));
-        console.log(Ext.getClassName(list.getItems()));
-        console.log(Ext.getClassName(list.getData()));
+        console.log(address.get('pxid'));
+        console.log(address.get('v'));
+        // console.log(Ext.getClassName(list.getItems()));
+        // console.log(Ext.getClassName(list.getData()));
         console.log(Ext.getClassName(list.getStore().getAt(index)));
         // console.log(list.getStore().getAt(index).a);
         console.log(Ext.getClassName(list.getStore()));
@@ -100,13 +115,13 @@ Ext.define("GMarks.controller.Marks", {
         console.log('list= ' + Ext.getClassName(list));
         console.log('index=' + index.toString()); 
         console.log('element=' + Ext.getClassName(element));
-        console.log('element.data.a='+  element.data.a);
-        console.log('addressStore.getAt(index)=' + addressStore.getAt(index));
+        // console.log('element.data.a='+  element.data.a);
+        // console.log('addressStore.getAt(index)=' + addressStore.getAt(index));
         // Ext.getClassName(
-        console.log('event=' + Ext.getClassName(event));
-        console.log('record=' + record.toString());
-        list.getRecord(element);
-        console.log(list.get('a'));
+        // console.log('event=' + Ext.getClassName(event));
+        // console.log('record=' + record.toString());
+        // list.getRecord(element);
+        // console.log(list.get('a'));
 
         // console.log(record.toString());
         

@@ -13,9 +13,10 @@ Ext.define('GMarks.model.Address', {
   },
   //Call this function to get extended data about the location (e.g when the user taps the result)
   getInfo: function(callback) {
+    console.log('getInfo');
     Ext.data.JsonP.request({
       // url: "http://addressfinder.co.nz/api/address/info",
-      url: "addressfinder.co.nz/api/address/info",
+      url: "http://addressfinder.co.nz/api/address/info",
       callbackKey: "callback",
       params: {
         pxid: this.get("pxid"),
@@ -26,8 +27,15 @@ Ext.define('GMarks.model.Address', {
         format: "json"
       },
       success: function(response) {
+        console.log('success');
+        //console.log(response);
         callback(response);
-      }
+      },
+      failure: function(response, request) {
+        console.log('getInfo failure');
+        console.log( request.toString() );
+        console.log( response );
+      } 
     });
   }
 });
