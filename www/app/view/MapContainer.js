@@ -143,9 +143,9 @@ Ext.define("GMarks.view.MapContainer", {
     onKeyup: function(fld, e, eOpts){
 
         console.log('onKeyup');
-        console.log(fld);
-        console.log(e);
-        console.log(eOpts);
+        console.log(fld.toString());
+        console.log(e.toString());
+        console.log(eOpts.toString());
         
         this.fireEvent('keyUpCommand', this.searchResults, fld, e, eOpts);
 

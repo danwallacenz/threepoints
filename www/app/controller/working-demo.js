@@ -1,4 +1,5 @@
-    keywordsSearchStore = new Ext.data.Store({        fields: ['keyword'],
+    keywordsSearchStore = new Ext.data.Store({        
+        fields: ['keyword'],
         //sorters: sortingVariable,
         pageSize: 15,
         clearOnPageLoad: false,

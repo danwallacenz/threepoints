@@ -57,6 +57,7 @@ Ext.define("GMarks.controller.Marks", {
         //var newResults = "Nothing";
         console.log('charPressed=');
         console.log(charPressed);
+        // console.log('searchResultsList is a ' + Ext.getClassName(searchResultsList));
         addressStore.getResults(charPressed, function(results){
             //debugger;
             if(results){
@@ -79,7 +80,7 @@ Ext.define("GMarks.controller.Marks", {
             }else{
                 //alert('no results');
                 console.log('no results');
-                searchResultsList.hide();
+                //searchResultsList.hide();
             }
         });
         //debugger;
@@ -89,41 +90,32 @@ Ext.define("GMarks.controller.Marks", {
         // var record = list.getRecord(element);
         var address = list.getStore().getAt(index);
 
-        address.getInfo(function(response){
+        var getInfoCallback = function(response){
             // var data = response.responseText;
             console.log('getInfo callback');
             console.log(response);
-            // console.log(response.responseText);
-            // console.log('response is a ' + Ext.getClassName(data));
-            // console.log(response.get('x'));
-            // console.log(response.get('y'));
             console.log('latitude: ' + response.y);
             console.log('longitude: ' + response.x);
 
-        });
+        };
+
+        address.getInfo(getInfoCallback);
+
         console.log(address.get('a'));
         console.log(address.get('pxid'));
         console.log(address.get('v'));
-        // console.log(Ext.getClassName(list.getItems()));
-        // console.log(Ext.getClassName(list.getData()));
+
         console.log(Ext.getClassName(list.getStore().getAt(index)));
-        // console.log(list.getStore().getAt(index).a);
+
         console.log(Ext.getClassName(list.getStore()));
         var addressStore = Ext.getStore("addressStore");
         console.log('onItemTapCommand');
-        // console.log('listComponent=' + Ext.getClassName(listComponent));
+ 
         console.log('list= ' + Ext.getClassName(list));
         console.log('index=' + index.toString()); 
         console.log('element=' + Ext.getClassName(element));
-        // console.log('element.data.a='+  element.data.a);
-        // console.log('addressStore.getAt(index)=' + addressStore.getAt(index));
-        // Ext.getClassName(
-        // console.log('event=' + Ext.getClassName(event));
-        // console.log('record=' + record.toString());
-        // list.getRecord(element);
-        // console.log(list.get('a'));
 
-        // console.log(record.toString());
+        list.hide();
         
     }, 
 
