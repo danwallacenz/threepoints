@@ -132,9 +132,10 @@ Ext.define("GMarks.view.MapContainer", {
             }
         };
         // this.add([topToolbar, map]);
-        this.add([topToolbar, searchResults]);
+        this.add([topToolbar, map, searchResults]);
+
         // this.add([topToolbar, searchResultsPopup]);
-        searchResultsPopup
+        // searchResultsPopup
         
          console.log("MapContainer-initialize end");
     },
@@ -270,6 +271,7 @@ Ext.define("GMarks.view.MapContainer", {
             }
         });
         geo.updateLocation();
+       
     },
 
     onShowMarksButtonTap: function () {
