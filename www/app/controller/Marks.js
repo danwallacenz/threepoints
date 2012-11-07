@@ -25,7 +25,8 @@ Ext.define("GMarks.controller.Marks", {
                 currentLocationCommand: "onCurrentLocationCommand",
                 editMarkerCommand:      "onEditMarkerCommand",
                 listMarksCommand:       "onListMarksCommand",
-                keyUpCommand:           "onKeyUpCommand"
+                keyUpCommand:           "onKeyUpCommand",
+                itemTapCommand:         "onItemTapCommand"
             },
             marksListContainer:{
                 // The commands fired by the marks list container.
@@ -49,18 +50,19 @@ Ext.define("GMarks.controller.Marks", {
 
     editMarkerCallerComponent: 'HOME',
 
-    onKeyUpCommand: function(mapContainer, fld, e, eOpts) {
+    onKeyUpCommand: function(searchResultsList, fld, e, eOpts) {
         console.log("onKeyUpCommand");
         var addressStore = Ext.getStore("addressStore");
         var charPressed = fld.getValue();
-        var newResults = "Nothing";
+        //var newResults = "Nothing";
         console.log('charPressed=');
         console.log(charPressed);
         addressStore.getResults(charPressed, function(results){
             //debugger;
             if(results){
                 addressStore.loadData(newResults, false);
-                alert(newResults);
+                searchResultsList.show();
+                console.log(newResults);//alert(newResults);
                 //fld.setData({text: "hello", leaf: true});
                 console.log("fld.getData()=");
                 console.log(fld.getData());
@@ -73,14 +75,42 @@ Ext.define("GMarks.controller.Marks", {
                 // console.log("");
                 // mapContainer.setData(results);
                 //mapContainer.setData({text: "hello", leaf: true});
-                debugger;
+                //debugger;
             }else{
                 //alert('no results');
                 console.log('no results');
+                searchResultsList.hide();
             }
         });
         //debugger;
     },
+
+    onItemTapCommand: function( list, index, element, event) {
+        var record = list.getRecord(element);
+        var address = list.getStore().getAt(index);
+        console.log(address.get('a'));
+        console.log(Ext.getClassName(list.getItems()));
+        console.log(Ext.getClassName(list.getData()));
+        console.log(Ext.getClassName(list.getStore().getAt(index)));
+        // console.log(list.getStore().getAt(index).a);
+        console.log(Ext.getClassName(list.getStore()));
+        var addressStore = Ext.getStore("addressStore");
+        console.log('onItemTapCommand');
+        // console.log('listComponent=' + Ext.getClassName(listComponent));
+        console.log('list= ' + Ext.getClassName(list));
+        console.log('index=' + index.toString()); 
+        console.log('element=' + Ext.getClassName(element));
+        console.log('element.data.a='+  element.data.a);
+        console.log('addressStore.getAt(index)=' + addressStore.getAt(index));
+        // Ext.getClassName(
+        console.log('event=' + Ext.getClassName(event));
+        console.log('record=' + record.toString());
+        list.getRecord(element);
+        console.log(list.get('a'));
+
+        // console.log(record.toString());
+        
+    }, 
 
     onMapRenderCommand: function () {
         console.log("onMapRenderCommand");
