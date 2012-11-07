@@ -50,19 +50,32 @@ Ext.define("GMarks.controller.Marks", {
 
     editMarkerCallerComponent: 'HOME',
 
-    onKeyUpCommand: function(searchResultsList, fld, e, eOpts) {
+    onKeyUpCommand: function(fld, e, eOpts) {
         console.log("onKeyUpCommand");
         var addressStore = Ext.getStore("addressStore");
         var charPressed = fld.getValue();
-        //var newResults = "Nothing";
+
+        var searchResultsList = this.getMapContainer().down('#search_results');
+        // searchResultsPopup = this.getMapContainer().down('#search_results_panel');
+        console.log('searchResultsList=');
+        console.log(Ext.getClassName(searchResultsList));
+
         console.log('charPressed=');
         console.log(charPressed);
         // console.log('searchResultsList is a ' + Ext.getClassName(searchResultsList));
         addressStore.getResults(charPressed, function(results){
             //debugger;
             if(results){
-                addressStore.loadData(newResults, false);
+                console.log('SHOW');
                 searchResultsList.show();
+                addressStore.loadData(newResults, false);
+                // ?????
+                // Ext.Viewport.add(searchResultsPopup);// ?????
+                // Ext.Viewport.add(searchResultsList);// ?????
+                // searchResultsList.show(true);// wtf
+                // searchResultsPopup.show();
+                // console.log('SHOW');
+                // searchResultsList.show();
                 console.log(newResults);//alert(newResults);
                 //fld.setData({text: "hello", leaf: true});
                 console.log("fld.getData()=");
@@ -70,17 +83,11 @@ Ext.define("GMarks.controller.Marks", {
                 //alert("results:" + results);
                 console.log('results(onKeyUpCommand)=');
                 console.log(results);
-                // console.log("");
-                // console.log('mapContainer=');
-                // console.log(mapContainer);
-                // console.log("");
-                // mapContainer.setData(results);
-                //mapContainer.setData({text: "hello", leaf: true});
-                //debugger;
             }else{
                 //alert('no results');
                 console.log('no results');
-                //searchResultsList.hide();
+                //searchResultsPopup.hide();
+                searchResultsList.hide();
             }
         });
         //debugger;
@@ -114,8 +121,9 @@ Ext.define("GMarks.controller.Marks", {
         console.log('list= ' + Ext.getClassName(list));
         console.log('index=' + index.toString()); 
         console.log('element=' + Ext.getClassName(element));
-
+        var searchResultsPopup = this.getMapContainer().down('#search_results_panel');
         list.hide();
+        // searchResultsPopup.hide();
         
     }, 
 

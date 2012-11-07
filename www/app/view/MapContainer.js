@@ -60,40 +60,47 @@ Ext.define("GMarks.view.MapContainer", {
                 id: 'search_results',
                 itemId: 'search_results',
                 itemTpl: '{a}',
+                layout : 'fit',
                 store: Ext.getStore("addressStore"),
                   listeners:  {
-                    itemtap: this.onItemTap, 
+                    itemtap: this.onItemTap,
+                    show: function(list, opts){
+                        console.log('******** SHOW');
+                        this.getStore().load();
+                    }, 
                     scope: this
                 }
         };
 
+       var searchResultsPopup =  {
+            xtype: 'panel',
+          //cls: "x-simulator-popup",
+          id: 'search_results_panel',
+          floating: true,
+          modal: true,
+          //centered: true,
+          style: {top: '65px', left: '0'},
+          width: "80%",
+          height: "40%",
+          layout: 'fit',
+          items: [
+            searchResults
+          ]
+        };
 
+   // keyWordsSearchPopup =  new Ext.Panel({
+   //    cls: "x-simulator-popup",
+   //    floating: true,
+   //    modal: true,
+   //    //centered: true,
+   //    style: {top: '65px', left: '0'},
+   //    width: "80%",
+   //    height: "40%",
+   //    dockedItems: [
+   //      keywordsSearchDataList
+   //    ]
+   //  });
 
-        // var editButton = {
-        //     xtype: "button",
-        //     // text: 'Edit',
-        //     // ui: 'action',
-        //     iconMask: true,
-        //     iconCls: 'compose',
-        //     handler: this.onEditButtonTap,
-        //     scope: this
-        // };
-
-        // var showMarksButton = {
-        //     xtype: "button",
-        //     text: 'Nearby Marks',
-        //     ui: 'action',
-        //     handler: this.onShowMarksButtonTap,
-        //     scope: this
-        // };
-
-        // var listMarksButton = {
-        //     xtype: "button",
-        //     text: 'Saved Marks',
-        //     ui: 'action',
-        //     handler: this.onListMarksButtonTap,
-        //     scope: this
-        // };
 
         var topToolbar = {
             xtype: "toolbar",
@@ -126,6 +133,8 @@ Ext.define("GMarks.view.MapContainer", {
         };
         // this.add([topToolbar, map]);
         this.add([topToolbar, searchResults]);
+        // this.add([topToolbar, searchResultsPopup]);
+        searchResultsPopup
         
          console.log("MapContainer-initialize end");
     },
@@ -147,7 +156,7 @@ Ext.define("GMarks.view.MapContainer", {
         console.log(e.toString());
         console.log(eOpts.toString());
         
-        this.fireEvent('keyUpCommand', this.searchResults, fld, e, eOpts);
+        this.fireEvent('keyUpCommand', fld, e, eOpts);
 
         //fld.fireEvent("currentLocationCommand", this);
     },
