@@ -27,7 +27,7 @@ Ext.define('GMarks.model.Address', {
         format: "json"
       },
       success: function(response) {
-        console.log('success');
+        // console.log('success');
         //console.log(response);
         callback(response);
       },

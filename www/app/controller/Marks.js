@@ -57,16 +57,16 @@ Ext.define("GMarks.controller.Marks", {
 
         var searchResultsList = this.getMapContainer().down('#search_results');
         // searchResultsPopup = this.getMapContainer().down('#search_results_panel');
-        console.log('searchResultsList=');
-        console.log(Ext.getClassName(searchResultsList));
+        // console.log('searchResultsList=');
+        // console.log(Ext.getClassName(searchResultsList));
 
-        console.log('charPressed=');
-        console.log(charPressed);
+        // console.log('charPressed=');
+        // console.log(charPressed);
         // console.log('searchResultsList is a ' + Ext.getClassName(searchResultsList));
         addressStore.getResults(charPressed, function(results){
             //debugger;
             if(results){
-                console.log('SHOW');
+                // console.log('SHOW');
                 searchResultsList.show();
                 addressStore.loadData(newResults, false);
                 // ?????
@@ -76,37 +76,34 @@ Ext.define("GMarks.controller.Marks", {
                 // searchResultsPopup.show();
                 // console.log('SHOW');
                 // searchResultsList.show();
-                console.log(newResults);//alert(newResults);
-                //fld.setData({text: "hello", leaf: true});
-                console.log("fld.getData()=");
-                console.log(fld.getData());
-                //alert("results:" + results);
-                console.log('results(onKeyUpCommand)=');
-                console.log(results);
+                // console.log(newResults);//alert(newResults);
+                // //fld.setData({text: "hello", leaf: true});
+                // console.log("fld.getData()=");
+                // console.log(fld.getData());
+                // //alert("results:" + results);
+                // console.log('results(onKeyUpCommand)=');
+                // console.log(results);
             }else{
-                //alert('no results');
                 console.log('no results');
-                //searchResultsPopup.hide();
                 searchResultsList.hide();
             }
         });
-        //debugger;
     },
 
     onItemTapCommand: function( list, index, element, event) {
         // var record = list.getRecord(element);
         var address = list.getStore().getAt(index);
         var mainController = this;
-        var map, marker,
+        var map, marker;
        
         map = this.getMap().getMap();
 
         var getInfoCallback = function(response){
             // var data = response.responseText;
-            console.log('getInfo callback');
-            console.log(response);
-            console.log('latitude: ' + response.y);
-            console.log('longitude: ' + response.x);
+            // console.log('getInfoCallback');
+            // console.log(response);
+            // console.log('latitude: ' + response.y);
+            // console.log('longitude: ' + response.x);
 
             console.log(response.a.replace(/\,/g,"<br />"));
             if (marker){
@@ -122,11 +119,11 @@ Ext.define("GMarks.controller.Marks", {
                 position: point,
                 map: map
             });
-            console.log('AAAAAAAAAAAinfowindow1');
+            // console.log('AAAAAAAAAAAinfowindow1');
             var infowindow = new google.maps.InfoWindow({
                 content: response.a.replace(/\,/g,"<br />")
             });
-            console.log('AAAAAAAAAAAAAAAinfowindow2');
+            // console.log('AAAAAAAAAAAAAAAinfowindow2');
             infowindow.open(map,marker);
             mainController.loadTitles();
 
@@ -134,19 +131,19 @@ Ext.define("GMarks.controller.Marks", {
 
         address.getInfo(getInfoCallback);
 
-        console.log(address.get('a'));
-        console.log(address.get('pxid'));
-        console.log(address.get('v'));
+        // console.log(address.get('a'));
+        // console.log(address.get('pxid'));
+        // console.log(address.get('v'));
 
-        console.log(Ext.getClassName(list.getStore().getAt(index)));
+        // console.log(Ext.getClassName(list.getStore().getAt(index)));
 
-        console.log(Ext.getClassName(list.getStore()));
+        // console.log(Ext.getClassName(list.getStore()));
         var addressStore = Ext.getStore("addressStore");
-        console.log('onItemTapCommand');
+        // console.log('onItemTapCommand');
  
-        console.log('list= ' + Ext.getClassName(list));
-        console.log('index=' + index.toString()); 
-        console.log('element=' + Ext.getClassName(element));
+        // console.log('list= ' + Ext.getClassName(list));
+        // console.log('index=' + index.toString()); 
+        // console.log('element=' + Ext.getClassName(element));
         // var searchResultsPopup = this.getMapContainer().down('#search_results_panel');
         list.hide();
         // searchResultsPopup.hide();
@@ -252,9 +249,9 @@ Ext.define("GMarks.controller.Marks", {
                 latitude: lat,
                 longitude: lng
             });
-        map.setMapOptions({
-            zoom: this.ZOOM_LEVEL
-        });
+        // map.setMapOptions({
+        //     zoom: this.ZOOM_LEVEL
+        // });
     },
 
     startLoadingIndicator: function(){

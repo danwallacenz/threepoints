@@ -48,10 +48,10 @@ Ext.define("GMarks.store.Address", {
         q: query
       },
       success: function(response, request) {
-        console.log('getAddresses response=');
-        console.log(response);
-        console.log('getAddresses request=');
-        console.log(request.toString());
+        // console.log('getAddresses response=');
+        // console.log(response);
+        // console.log('getAddresses request=');
+        // console.log(request.toString());
         if (_this.last_query === query) {
           _this.address_data = response.completions.slice(0, 10);
           _this.address_ready = true;
@@ -66,8 +66,8 @@ Ext.define("GMarks.store.Address", {
     });
   },
   getLocations: function(query) {
-    console.log('getLocations query=');
-    console.log(query);
+    console.log('getLocations');
+    // console.log(query);
 
     var _this = this;
     Ext.data.JsonP.request({
@@ -83,10 +83,10 @@ Ext.define("GMarks.store.Address", {
         q: query
       },
       success: function(response, request) {
-        console.log('getLocations response=');
-        console.log(response);
-        console.log('getLocations request=');
-        console.log(request.toString());
+        // console.log('getLocations response=');
+        // console.log(response);
+        // console.log('getLocations request=');
+        // console.log(request.toString());
         if (_this.last_query === query) {
           _this.location_data = response.completions.slice(0, 10);
           _this.location_ready = true;

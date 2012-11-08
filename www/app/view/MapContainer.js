@@ -19,14 +19,6 @@ Ext.define("GMarks.view.MapContainer", {
         catch(e){
             Ext.Msg.alert('Offline!', 'Cannot connect to Google Maps', Ext.emptyFn);
         }
-       
-        // var newButton = {
-        //     xtype: "button",
-        //     text: 'New',
-        //     ui: 'action',
-        //     handler: this.onNewButtonTap,
-        //     scope: this
-        // };
 
         var currentLocationButton = {
             xtype: "button",
@@ -72,36 +64,6 @@ Ext.define("GMarks.view.MapContainer", {
                 }
         };
 
-       var searchResultsPopup =  {
-            xtype: 'panel',
-          //cls: "x-simulator-popup",
-          id: 'search_results_panel',
-          floating: true,
-          modal: true,
-          //centered: true,
-          style: {top: '65px', left: '0'},
-          width: "80%",
-          height: "40%",
-          layout: 'fit',
-          items: [
-            searchResults
-          ]
-        };
-
-   // keyWordsSearchPopup =  new Ext.Panel({
-   //    cls: "x-simulator-popup",
-   //    floating: true,
-   //    modal: true,
-   //    //centered: true,
-   //    style: {top: '65px', left: '0'},
-   //    width: "80%",
-   //    height: "40%",
-   //    dockedItems: [
-   //      keywordsSearchDataList
-   //    ]
-   //  });
-
-
         var topToolbar = {
             xtype: "toolbar",
             docked: "top",
@@ -134,33 +96,18 @@ Ext.define("GMarks.view.MapContainer", {
         // this.add([topToolbar, map]);
         this.add([topToolbar, map, searchResults]);
         // this.add([topToolbar, searchResults, map]);
-
-        // this.add([topToolbar, searchResultsPopup]);
-        // searchResultsPopup
         
          console.log("MapContainer-initialize end");
     },
 
-    // show: function(){
-    //     // Address Search
-    //       var widget;
-    //       window.onload = function(){
-    //         var searchFieldHtmlId = document.getElementsByName("search_field")[0].id;
-    //         widget = new AddressFinder.Widget(document.getElementById(searchFieldHtmlId), "8VPB3L6U9XD4WKYECH7M");
-    //       };
-    //     // End Address Search
-    // },
 
     onKeyup: function(fld, e, eOpts){
-
         console.log('onKeyup');
-        console.log(fld.toString());
-        console.log(e.toString());
-        console.log(eOpts.toString());
+        // console.log(fld.toString());
+        // console.log(e.toString());
+        // console.log(eOpts.toString());
         
         this.fireEvent('keyUpCommand', fld, e, eOpts);
-
-        //fld.fireEvent("currentLocationCommand", this);
     },
 
     onItemTap: function (list, index, element, event) {
@@ -171,16 +118,6 @@ Ext.define("GMarks.view.MapContainer", {
         console.log("onMapRender");
 
         // START OF EXPERIMENTAL CODE
-
-        // Address Search
-        
-          // var widget;
-          // window.onload = function(){
-          //   var searchFieldHtmlId = document.getElementsByName("search_field")[0].id;
-          //   widget = new AddressFinder.Widget(document.getElementById(searchFieldHtmlId), "8VPB3L6U9XD4WKYECH7M");
-          // };
-
-        // End Address Search
 
         var markers = [];
         var infowindow = new google.maps.InfoWindow();
@@ -196,15 +133,7 @@ Ext.define("GMarks.view.MapContainer", {
           },
           markerOptions: {
             draggable: true
-          }//,
-          // circleOptions: {
-          //   fillColor: '#ffff00',
-          //   fillOpacity: 1,
-          //   strokeWeight: 5,
-          //   clickable: false,
-          //   zIndex: 1,
-          //   editable: true
-          // }
+          }
         });
         drawingManager.setMap(map);  
          drawingManager.setOptions({
