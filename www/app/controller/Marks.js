@@ -107,7 +107,6 @@ Ext.define("GMarks.controller.Marks", {
             console.log(response);
             console.log('latitude: ' + response.y);
             console.log('longitude: ' + response.x);
-            // mainController.setMapCentre(response.y, response.x);
 
             console.log(response.a.replace(/\,/g,"<br />"));
             if (marker){
@@ -116,7 +115,9 @@ Ext.define("GMarks.controller.Marks", {
             var point = new google.maps.LatLng(response.y,response.x);
             map.setCenter(point);
             // mainController.setMapCentre(response.y, response.x);
-            map.setZoom(18);
+
+            // zoom is set in loadTitles()
+            //map.setZoom(18);
             marker = new google.maps.Marker({
                 position: point,
                 map: map
@@ -282,7 +283,7 @@ Ext.define("GMarks.controller.Marks", {
                 x: lng,
                 y: lat ,
                 radius: 100,
-                max_results: 5,
+                max_results: 1,
                 geometry: true,
                 with_field_names: true
             },
@@ -297,14 +298,14 @@ Ext.define("GMarks.controller.Marks", {
             var TITLES_LAYER = 804;
             
             var successFn = function(result, request){
-                debugger;            
+                // debugger;            
                 var titles = result.vectorQuery.layers["804"].features;
 
                 mainController.showTitlesOnMap(titles);
                 
                 // set map centre to where the LINZ data is obtained from.
                 mainController.setMapCentre(mapCentre.lat, mapCentre.lng);
-                mainController.getMap().getMap().setZoom(18);
+                mainController.getMap().getMap().setZoom(20);// 18
             };
             mainController.loadLINZData( mapCentre.lat, mapCentre.lng, TITLES_LAYER, successFn);
 
