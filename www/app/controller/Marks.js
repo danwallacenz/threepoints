@@ -96,6 +96,10 @@ Ext.define("GMarks.controller.Marks", {
     onItemTapCommand: function( list, index, element, event) {
         // var record = list.getRecord(element);
         var address = list.getStore().getAt(index);
+        var mainController = this;
+        var map, marker,
+       
+        map = this.getMap().getMap();
 
         var getInfoCallback = function(response){
             // var data = response.responseText;
@@ -103,6 +107,27 @@ Ext.define("GMarks.controller.Marks", {
             console.log(response);
             console.log('latitude: ' + response.y);
             console.log('longitude: ' + response.x);
+            // mainController.setMapCentre(response.y, response.x);
+
+            console.log(response.a.replace(/\,/g,"<br />"));
+            if (marker){
+               marker.setMap(null);
+            }
+            var point = new google.maps.LatLng(response.y,response.x);
+            map.setCenter(point);
+            // mainController.setMapCentre(response.y, response.x);
+            map.setZoom(18);
+            marker = new google.maps.Marker({
+                position: point,
+                map: map
+            });
+            console.log('AAAAAAAAAAAinfowindow1');
+            var infowindow = new google.maps.InfoWindow({
+                content: response.a.replace(/\,/g,"<br />")
+            });
+            console.log('AAAAAAAAAAAAAAAinfowindow2');
+            infowindow.open(map,marker);
+            mainController.loadTitles();
 
         };
 
@@ -121,7 +146,7 @@ Ext.define("GMarks.controller.Marks", {
         console.log('list= ' + Ext.getClassName(list));
         console.log('index=' + index.toString()); 
         console.log('element=' + Ext.getClassName(element));
-        var searchResultsPopup = this.getMapContainer().down('#search_results_panel');
+        // var searchResultsPopup = this.getMapContainer().down('#search_results_panel');
         list.hide();
         // searchResultsPopup.hide();
         

@@ -28,6 +28,7 @@
 	<true/>
 	<key>ExternalHosts</key>
 	<array>
+		<string>*.data.linz.govt.nz</string>
 		<string>*.gstatic.com</string>
 		<string>*.googleapis.com</string>
 		<string>*.addressfinder.co.nz</string>
